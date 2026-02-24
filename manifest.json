@@ -1,11 +1,12 @@
 {
     "manifest_version": 3,
-    "name": "Amazon S&S Mass Cancel",
-    "version": "1.1.0",
-    "description": "Mass cancel all Amazon Subscribe & Save subscriptions with one click",
+    "name": "Amazon Subscribe & Save Mass Cancel",
+    "version": "1.2.0",
+    "description": "Mass cancel all Amazon Subscribe & Save subscriptions with one click. Block or highlight sponsored promotions.",
     "permissions": [
         "activeTab",
-        "scripting"
+        "scripting",
+        "storage"
     ],
     "host_permissions": [
         "https://www.amazon.com/*",
@@ -64,6 +65,35 @@
             ],
             "js": [
                 "content/extractor.js"
+            ],
+            "run_at": "document_idle"
+        },
+        {
+            "matches": [
+                "https://www.amazon.com/*",
+                "https://www.amazon.co.uk/*",
+                "https://www.amazon.ca/*",
+                "https://www.amazon.de/*",
+                "https://www.amazon.fr/*",
+                "https://www.amazon.it/*",
+                "https://www.amazon.es/*",
+                "https://www.amazon.co.jp/*",
+                "https://www.amazon.in/*",
+                "https://www.amazon.com.br/*",
+                "https://www.amazon.com.mx/*",
+                "https://www.amazon.com.au/*",
+                "https://www.amazon.nl/*",
+                "https://www.amazon.se/*",
+                "https://www.amazon.pl/*",
+                "https://www.amazon.sg/*",
+                "https://www.amazon.ae/*",
+                "https://www.amazon.sa/*"
+            ],
+            "js": [
+                "content/promotions-blocker.js"
+            ],
+            "css": [
+                "content/promotions-blocker.css"
             ],
             "run_at": "document_idle"
         }

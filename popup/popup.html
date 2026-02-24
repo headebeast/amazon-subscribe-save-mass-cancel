@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Amazon S&S Mass Cancel</title>
+  <title>Amazon Subscribe & Save Mass Cancel</title>
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="popup.css">
 </head>
@@ -24,75 +24,109 @@
     <div class="header-card">
       <div class="header-icon">📦</div>
       <div class="header-text">
-        <span class="title-line1">Amazon S&S</span>
+        <span class="title-line1">Subscribe & Save</span>
         <span class="title-line2">Mass Cancel</span>
       </div>
     </div>
-
-    <!-- Subscription Count (main display) -->
-    <div id="count-panel" class="panel count-panel">
-      <div class="sparkle sparkle-1">✦</div>
-      <div class="sparkle sparkle-2">✦</div>
-      <div class="sparkle sparkle-3">✧</div>
-      <div class="sparkle sparkle-4">✧</div>
-      <div class="count-display">
-        <span id="sub-count">—</span>
-        <span class="label">Subscriptions Found</span>
-      </div>
-    </div>
-
-    <!-- Status Panel (small, below count) -->
-    <div id="status-panel" class="panel status-panel">
-      <div id="page-status" class="status-indicator">
-        <span class="dot"></span>
-        <span class="text">Checking page...</span>
-      </div>
-    </div>
-
-    <!-- Progress Panel -->
-    <div id="progress-panel" class="panel hidden">
-      <div class="warning-banner">
-        ⚠️ Keep this popup open until complete!
-      </div>
-      <div class="progress-section">
-        <div class="progress-bar">
-          <div id="progress-fill" class="progress-fill"></div>
-        </div>
-        <div class="progress-percent">
-          <span class="clock-icon">🕐</span>
-          <span id="progress-pct">0%</span>
-        </div>
-      </div>
-      <div class="progress-label">Progress</div>
-      <div id="progress-details" class="progress-details"></div>
-    </div>
-
-    <!-- Results Panel -->
-    <div id="results-panel" class="panel hidden">
-      <div class="results-summary">
-        <div class="result-item success">
-          <span id="success-count">0</span>
-          <span class="label">Canceled</span>
-        </div>
-        <div class="result-item error">
-          <span id="error-count">0</span>
-          <span class="label">Failed</span>
-        </div>
-      </div>
-      <div id="error-list" class="error-list hidden"></div>
-    </div>
-
-    <!-- Action Button -->
-    <button id="btn-cancel-all" class="btn-cancel" disabled>
-      <span class="btn-icon">🗑️</span>
-      <span class="btn-text">Cancel All</span>
-    </button>
-
-    <!-- Secondary Actions -->
-    <div class="secondary-actions">
-      <button id="btn-scan" class="btn-secondary">🔍 Scan Page</button>
+    <!-- Update Banner (shown once after extension update) -->
+    <div id="update-banner" class="update-banner hidden">
+      🎉 <strong>Updated!</strong> New: Promotions Blocker — block or highlight sponsored items.
+      <button id="dismiss-update" class="dismiss-btn">✕</button>
     </div>
     <a href="https://ko-fi.com/hedidev" target="_blank" class="btn-donate">☕ Buy me a coffee</a>
+
+    <!-- S&S Section (only visible on Subscribe & Save page) -->
+    <div id="sns-section" class="hidden">
+
+      <!-- Subscription Count (main display) -->
+      <div id="count-panel" class="panel count-panel">
+        <div class="sparkle sparkle-1">✦</div>
+        <div class="sparkle sparkle-2">✦</div>
+        <div class="sparkle sparkle-3">✧</div>
+        <div class="sparkle sparkle-4">✧</div>
+        <div class="count-display">
+          <span id="sub-count">—</span>
+          <span class="label">Subscriptions Found</span>
+        </div>
+      </div>
+
+      <!-- Status Panel (small, below count) -->
+      <div id="status-panel" class="panel status-panel">
+        <div id="page-status" class="status-indicator">
+          <span class="dot"></span>
+          <span class="text">Checking page...</span>
+        </div>
+      </div>
+
+      <!-- Progress Panel -->
+      <div id="progress-panel" class="panel hidden">
+        <div class="warning-banner">
+          ⚠️ Keep this popup open until complete!
+        </div>
+        <div class="progress-section">
+          <div class="progress-bar">
+            <div id="progress-fill" class="progress-fill"></div>
+          </div>
+          <div class="progress-percent">
+            <span class="clock-icon">🕐</span>
+            <span id="progress-pct">0%</span>
+          </div>
+        </div>
+        <div class="progress-label">Progress</div>
+        <div id="progress-details" class="progress-details"></div>
+      </div>
+
+      <!-- Results Panel -->
+      <div id="results-panel" class="panel hidden">
+        <div class="results-summary">
+          <div class="result-item success">
+            <span id="success-count">0</span>
+            <span class="label">Canceled</span>
+          </div>
+          <div class="result-item error">
+            <span id="error-count">0</span>
+            <span class="label">Failed</span>
+          </div>
+        </div>
+        <div id="error-list" class="error-list hidden"></div>
+      </div>
+
+      <!-- Action Button -->
+      <button id="btn-cancel-all" class="btn-cancel" disabled>
+        <span class="btn-icon">🗑️</span>
+        <span class="btn-text">Cancel All</span>
+      </button>
+
+      <!-- Secondary Actions -->
+      <div class="secondary-actions">
+        <button id="btn-scan" class="btn-secondary">🔍 Scan Page</button>
+      </div>
+
+    </div><!-- /sns-section -->
+
+    <!-- Promotions Blocker Section -->
+    <div class="panel promo-panel">
+      <div class="promo-header">
+        <span class="promo-icon">🛡️</span>
+        <span class="promo-title">Promotions Blocker</span>
+      </div>
+      <p class="promo-desc">Control how sponsored items appear on Amazon</p>
+      <div class="promo-toggle" id="promo-toggle">
+        <label class="promo-option" data-mode="block">
+          <input type="radio" name="promoMode" value="block">
+          <span class="promo-label">🚫 Block</span>
+        </label>
+        <label class="promo-option active" data-mode="highlight">
+          <input type="radio" name="promoMode" value="highlight" checked>
+          <span class="promo-label">🔴 Highlight</span>
+        </label>
+        <label class="promo-option" data-mode="off">
+          <input type="radio" name="promoMode" value="off">
+          <span class="promo-label">✅ Off</span>
+        </label>
+      </div>
+    </div>
+
 
     <!-- Instructions -->
     <div id="instructions" class="instructions">
@@ -104,6 +138,25 @@
         <li>Click <strong>Scan Page</strong> to find subscriptions</li>
         <li>Click <strong>Cancel All</strong> to cancel them</li>
       </ol>
+    </div>
+
+    <!-- Footer Links -->
+    <div class="footer-links">
+      <a href="https://chromewebstore.google.com/detail/amazon-ss-mass-cancel/cclmjhhloncemallfneleaphpnpflfab"
+        target="_blank" class="footer-link">
+        🏪 Chrome Web Store
+      </a>
+      <a href="https://github.com/headebeast/amazon-subscribe-save-mass-cancel/issues/new?labels=bug&title=%5BBug%5D+"
+        target="_blank" class="footer-link">
+        🐛 Report Bug
+      </a>
+      <a href="https://github.com/headebeast/amazon-subscribe-save-mass-cancel/issues/new?labels=enhancement&title=%5BFeature%5D+"
+        target="_blank" class="footer-link">
+        💡 Request Feature
+      </a>
+      <a href="https://forms.gle/YOUR_FORM_ID_HERE" target="_blank" class="footer-link">
+        📝 Feedback Form
+      </a>
     </div>
   </div>
 

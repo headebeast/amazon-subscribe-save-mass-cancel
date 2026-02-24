@@ -1,5 +1,5 @@
 /**
- * Amazon S&S Mass Cancel - Popup Controller
+ * Amazon Subscribe & Save Mass Cancel - Popup Controller
  */
 
 class PopupController {
@@ -16,6 +16,7 @@ class PopupController {
 
     initElements() {
         this.elements = {
+            snsSection: document.getElementById('sns-section'),
             statusPanel: document.getElementById('status-panel'),
             pageStatus: document.getElementById('page-status'),
             countPanel: document.getElementById('count-panel'),
@@ -44,12 +45,13 @@ class PopupController {
             const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
 
             if (tab.url && /amazon\.[a-z.]+\/auto-deliveries/.test(tab.url)) {
-                this.setStatus('ready', 'Ready - S&S page detected');
+                this.elements.snsSection.classList.remove('hidden');
+                this.setStatus('ready', 'Ready - Subscribe & Save page detected');
             } else {
-                this.setStatus('error', 'Navigate to S&S page first');
+                this.elements.snsSection.classList.add('hidden');
             }
         } catch (error) {
-            this.setStatus('error', 'Unable to check page');
+            this.elements.snsSection.classList.add('hidden');
         }
     }
 
@@ -86,7 +88,7 @@ class PopupController {
             }
         } catch (error) {
             console.error('Scan error:', error);
-            this.setStatus('error', 'Scan failed - make sure you\'re on the S&S page');
+            this.setStatus('error', 'Scan failed - make sure you\'re on the Subscribe & Save page');
         }
 
         this.elements.btnScan.disabled = false;
@@ -187,7 +189,7 @@ function extractSubscriptionIds() {
         const data = span.getAttribute('data-edit-link-subscription-tablet');
         if (data) {
             const match = data.match(/subscriptionId=([^&"]+)/);
-            if (match) ids.push(match[1]);
+            if (match && !ids.includes(match[1])) ids.push(match[1]);
         }
     });
 
@@ -253,4 +255,90 @@ async function cancelSubscription(subscriptionId) {
 // Initialize popup
 document.addEventListener('DOMContentLoaded', () => {
     new PopupController();
+    new PromotionsToggle();
+    new UpdateBanner();
 });
+
+/**
+ * Promotions Blocker Toggle — manages the 3-state UI in the popup.
+ * Reads/writes "promoBlockerMode" in chrome.storage.local.
+ */
+class PromotionsToggle {
+    constructor() {
+        this.storageKey = 'promoBlockerMode';
+        this.toggleContainer = document.getElementById('promo-toggle');
+        if (!this.toggleContainer) return;
+
+        this.options = this.toggleContainer.querySelectorAll('.promo-option');
+        this.loadState();
+        this.bindEvents();
+    }
+
+    loadState() {
+        if (chrome?.storage?.local) {
+            chrome.storage.local.get([this.storageKey], (result) => {
+                const mode = result[this.storageKey] || 'highlight';
+                this.setActiveOption(mode);
+            });
+        }
+    }
+
+    bindEvents() {
+        this.options.forEach(option => {
+            option.addEventListener('click', () => {
+                const radio = option.querySelector('input[type="radio"]');
+                const mode = radio.value;
+                radio.checked = true;
+                this.setActiveOption(mode);
+                if (chrome?.storage?.local) {
+                    chrome.storage.local.set({ [this.storageKey]: mode });
+                }
+            });
+        });
+    }
+
+    setActiveOption(mode) {
+        this.options.forEach(opt => {
+            opt.classList.toggle('active', opt.dataset.mode === mode);
+            const radio = opt.querySelector('input[type="radio"]');
+            radio.checked = opt.dataset.mode === mode;
+        });
+    }
+}
+
+/**
+ * Update Banner — shows a one-time notification when the extension version changes.
+ * Compares chrome.runtime.getManifest().version to stored "lastSeenVersion".
+ */
+class UpdateBanner {
+    constructor() {
+        this.banner = document.getElementById('update-banner');
+        this.dismissBtn = document.getElementById('dismiss-update');
+        if (!this.banner || !chrome?.runtime?.getManifest) return;
+
+        this.currentVersion = chrome.runtime.getManifest().version;
+        this.storageKey = 'lastSeenVersion';
+        this.check();
+        this.dismissBtn?.addEventListener('click', () => this.dismiss());
+    }
+
+    check() {
+        if (!chrome?.storage?.local) return;
+        chrome.storage.local.get([this.storageKey], (result) => {
+            const lastVersion = result[this.storageKey];
+            if (lastVersion && lastVersion !== this.currentVersion) {
+                this.banner.classList.remove('hidden');
+            } else if (!lastVersion) {
+                // First install — store version, don't show banner
+                chrome.storage.local.set({ [this.storageKey]: this.currentVersion });
+            }
+        });
+    }
+
+    dismiss() {
+        this.banner.classList.add('hidden');
+        if (chrome?.storage?.local) {
+            chrome.storage.local.set({ [this.storageKey]: this.currentVersion });
+        }
+    }
+}

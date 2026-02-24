@@ -1,6 +1,10 @@
 # 🛒 Amazon Subscribe & Save Mass Cancel
 
-> Bulk cancel all your Amazon Subscribe & Save subscriptions in one click.
+> Bulk cancel all your Amazon Subscribe & Save subscriptions in one click. Block or highlight sponsored promotions.
+
+<a href="https://chromewebstore.google.com/detail/amazon-ss-mass-cancel/cclmjhhloncemallfneleaphpnpflfab">
+  <img src="https://img.shields.io/badge/Install-Chrome%20Web%20Store-4285F4?logo=googlechrome&logoColor=white&style=for-the-badge" alt="Install from Chrome Web Store">
+</a>
 
 ![Chrome Extension](https://img.shields.io/badge/Chrome-Extension-green?logo=googlechrome)
 ![Manifest V3](https://img.shields.io/badge/Manifest-V3-blue)
@@ -24,6 +28,10 @@ Amazon Subscribe & Save is great for discounts, but managing dozens of subscript
 - ⚡ **Direct API Calls** — No popup spam, no new tabs
 - 🛡️ **Rate Limit Protection** — Built-in delays to avoid Amazon blocks
 - 📝 **Error Reporting** — See exactly which items failed (if any)
+- 🛡️ **Promotions Blocker** — Block or highlight sponsored items across all Amazon pages
+  - 🚫 **Block mode** — Completely hides sponsored products
+  - 🔴 **Highlight mode** — Outlines sponsored items in red
+  - ✅ **Off mode** — Leaves everything as-is (default)
 
 ## 📦 Installation
 
@@ -55,14 +63,14 @@ Amazon Subscribe & Save is great for discounts, but managing dozens of subscript
 #### Step 4: Pin the Extension (Optional)
 
 1. Click the puzzle piece icon 🧩 in Chrome's toolbar
-2. Find "Amazon S&S Mass Cancel" and click the pin 📌 icon
+2. Find "Amazon Subscribe & Save Mass Cancel" and click the pin 📌 icon
 
 </details>
 
 ### Quick Install (For Developers)
 
 ```bash
-git clone https://github.com/headebeast/amazon-sns-mass-cancel.git
+git clone https://github.com/headebeast/amazon-subscribe-save-mass-cancel.git
 ```
 Then load the folder as an unpacked extension in `chrome://extensions/`.
 
@@ -113,14 +121,16 @@ GET https://www.amazon.{domain}/auto-deliveries/ajax/cancelSubscriptionAction
 ### Project Structure
 
 ```
-amazon-sns-mass-cancel/
+amazon-subscribe-save-mass-cancel/
 ├── manifest.json          # Chrome extension manifest (V3)
 ├── popup/
 │   ├── popup.html         # Extension popup UI
-│   ├── popup.css          # Dark theme styling
-│   └── popup.js           # Main cancellation logic
+│   ├── popup.css          # Theme styling
+│   └── popup.js           # Main cancellation logic + promotions toggle
 ├── content/
-│   └── extractor.js       # Content script for page detection
+│   ├── extractor.js       # Content script for S&S page detection
+│   ├── promotions-blocker.js   # Content script for sponsored item detection
+│   └── promotions-blocker.css  # Styles for block/highlight modes
 └── icons/
     ├── icon16.png
     ├── icon48.png
