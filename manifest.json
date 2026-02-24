@@ -2,7 +2,7 @@
     "manifest_version": 3,
     "name": "Amazon S&S Cancel + Sponsored Blocker",
     "version": "1.2.0",
-    "description": "Mass cancel all Amazon Subscribe & Save subscriptions with one click. Block or highlight sponsored promotions.",
+    "description": "One-click mass cancel all Amazon Subscribe & Save subscriptions. Block or highlight sponsored products on any Amazon page.",
     "permissions": [
         "activeTab",
         "scripting",
