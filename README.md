@@ -1,6 +1,6 @@
-# 🛒 Amazon Subscribe & Save Mass Cancel
+# 🛒 Amazon S&S Cancel + Sponsored Blocker
 
-> Bulk cancel all your Amazon Subscribe & Save subscriptions in one click. Block or highlight sponsored promotions.
+> Bulk cancel all your Amazon Subscribe & Save subscriptions in one click. Block or highlight sponsored products.
 
 <a href="https://chromewebstore.google.com/detail/amazon-ss-mass-cancel/cclmjhhloncemallfneleaphpnpflfab">
   <img src="https://img.shields.io/badge/Install-Chrome%20Web%20Store-4285F4?logo=googlechrome&logoColor=white&style=for-the-badge" alt="Install from Chrome Web Store">
