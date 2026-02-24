@@ -114,6 +114,16 @@ Real-time progress bar while subscriptions are being canceled one by one.
   <img src="screenshots/cancel-progress.png" alt="Cancellation in progress" width="320">
 </p>
 
+---
+
+### 🛡️ Promotions Blocker
+
+Block or highlight sponsored products across all Amazon pages.
+
+<p align="center">
+  <img src="screenshots/promotions-blocker.png" alt="Promotions Blocker feature" width="320">
+</p>
+
 ## ⚠️ Important Notes
 
 - **Emails**: Amazon sends a confirmation email for each canceled subscription. Expect inbox activity.
