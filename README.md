@@ -84,13 +84,21 @@ Then load the folder as an unpacked extension in `chrome://extensions/`.
 
 That's it! Watch the progress bar as each subscription is canceled.
 
-## 📸 Screenshot
+## 📸 Screenshots
 
 <p align="center">
-  <img src="screenshots/progress.png" alt="Extension in action - canceling 66 subscriptions" width="320">
+  <img src="screenshots/popup-overview.png" alt="Extension popup overview" width="280">
+  &nbsp;&nbsp;
+  <img src="screenshots/scan-results.png" alt="26 subscriptions found" width="280">
+  &nbsp;&nbsp;
+  <img src="screenshots/cancel-progress.png" alt="Cancellation in progress" width="280">
 </p>
 
-*The extension showing real-time progress while canceling 66 subscriptions*
+<p align="center">
+  <em>Popup overview</em> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <em>Subscriptions detected</em> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <em>Cancellation in progress</em>
+</p>
 
 ## ⚠️ Important Notes
 
