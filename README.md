@@ -86,13 +86,33 @@ That's it! Watch the progress bar as each subscription is canceled.
 
 ## 📸 Screenshots
 
+### 🖥️ Extension Popup
+
+The main popup with all features — mass cancel, scan, and promotions blocker.
+
 <p align="center">
-  <img src="screenshots/popup-overview.png" alt="Extension popup overview" width="300">
+  <img src="screenshots/popup-overview.png" alt="Extension popup overview" width="320">
 </p>
 
-| Subscriptions Detected | Cancellation in Progress |
-|:---:|:---:|
-| <img src="screenshots/scan-results.png" alt="26 subscriptions found" width="300"> | <img src="screenshots/cancel-progress.png" alt="Cancellation in progress" width="300"> |
+---
+
+### 🔍 Subscriptions Detected
+
+After clicking **Scan Page**, the extension finds all active subscriptions on the page.
+
+<p align="center">
+  <img src="screenshots/scan-results.png" alt="26 subscriptions found" width="320">
+</p>
+
+---
+
+### ⏳ Cancellation in Progress
+
+Real-time progress bar while subscriptions are being canceled one by one.
+
+<p align="center">
+  <img src="screenshots/cancel-progress.png" alt="Cancellation in progress" width="320">
+</p>
 
 ## ⚠️ Important Notes
 
