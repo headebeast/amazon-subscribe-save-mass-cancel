@@ -87,18 +87,12 @@ That's it! Watch the progress bar as each subscription is canceled.
 ## 📸 Screenshots
 
 <p align="center">
-  <img src="screenshots/popup-overview.png" alt="Extension popup overview" width="280">
-  &nbsp;&nbsp;
-  <img src="screenshots/scan-results.png" alt="26 subscriptions found" width="280">
-  &nbsp;&nbsp;
-  <img src="screenshots/cancel-progress.png" alt="Cancellation in progress" width="280">
+  <img src="screenshots/popup-overview.png" alt="Extension popup overview" width="300">
 </p>
 
-<p align="center">
-  <em>Popup overview</em> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <em>Subscriptions detected</em> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <em>Cancellation in progress</em>
-</p>
+| Subscriptions Detected | Cancellation in Progress |
+|:---:|:---:|
+| <img src="screenshots/scan-results.png" alt="26 subscriptions found" width="300"> | <img src="screenshots/cancel-progress.png" alt="Cancellation in progress" width="300"> |
 
 ## ⚠️ Important Notes
 
